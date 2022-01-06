@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="C:/html/style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>   
+  
+  <style>
+  .w3-ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }  
+  .w3-ul li {
+    padding: 8px 16px;
+    border-bottom: 1px solid #ddd;
+  }
+  .w3-padding-16 {
+    padding-top: 16px!important;
+    padding-bottom: 16px!important;
+  }
+  .w3-card, .w3-card-2 {
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    
+  }
+  .w3-light-grey, .w3-hover-light-grey:hover, .w3-light-gray, .w3-hover-light-gray:hover {
+    color: #000!important;
+    background-color: #f1f1f1!important;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  .w3-container, .w3-panel {
+    padding: 0.01em 16px;
+  }
+
+  li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+  }
+  .w3-ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+  }
+  .w3-white, .w3-hover-white:hover {
+    color: #000!important;
+    background-color: #fff!important;
+  } 
+  .w3-light-grey, .w3-hover-light-grey:hover, .w3-light-gray, .w3-hover-light-gray:hover {
+    color: #000!important;
+    background-color: #f1f1f1!important;
+  }
+  html, body {
+    font-family: Verdana,sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .w3-right {
+    float: right!important;
+  }
+
+  .w3-btn, .w3-btn:link, .w3-btn:visited {
+    color: #FFFFFF;
+    background-color: #4CAF50;
+  }
+
+  .w3-btn, .w3-button {
+    border: none;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    height: 30px;
+    width: 80px;
+  }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <title>Document</title>
+</head>
+<body> 
+  <input type="checkbox" id="check">  
+    <label for="check">
+        <i class="fas fa-bars" id="btn"></i>
+        <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+        <header>경기 둘레길</header>
+        <ul>
+            <li><a href="C:/html/tour9_둘레길.html"><i class="fas fa-map-signs"></i>둘레길</a></li>
+            <li><a href="C:/html/tour6_관광지.html"><i class="fas fa-map-marker-alt">관광지</i></a></li>
+            <li><a href="C:/html/tour8_go캠핑.html"><i class="fas fa-map-pin"></i>go캠핑</a></li>
+            <li><a href="C:/html/tour7_레포츠.html"><i class="fas fa-skiing"></i>레포츠</a></li>
+            <li><a href="C:/html/tour15_후기.html"><i class="fas fa-pencil-alt"></i>후기</a></li>
+        </ul>
+    </div>    
+
+
+
+
+ <div style="margin-left:400px; margin-top:30px;"> 
+  <div ng-app="myShoppingList" ng-controller="myCtrl" class="w3-card-2 ng-scope" style="max-width:400px;">
+    <header class="w3-container w3-light-grey w3-padding-16">
+      <h3>프로그램 후기</h3>
+    </header>
+    <ul class="w3-ul">
+      <li ng-repeat="x in products" class="w3-padding-16 ng-binding ng-scope">{{x}}<span ng-click="removeItem($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+    </ul>
+
+    <div class="w3-container w3-light-grey w3-padding-16">
+      <div class="w3-row w3-margin-top">
+        <div class="w3-col s10">
+          <textarea name="textarea" placeholder="후기를 남겨주세요." ng-model="addMe" class="w3-input w3-border w3-padding ng-pristine ng-untouched ng-valid ng-empty" row="500" width=500px;></textarea>
+        </div>
+        <div class="w3-col s2">
+          <button ng-click="addItem()" class="w3-btn w3-padding">Add</button>
+        </div>
+      </div>
+      <p class="w3-text-red ng-binding"></p>
+    </div>
+  </div>
+</div> 
+  <script>
+    var app = angular.module("myShoppingList", []); 
+    app.controller("myCtrl", function($scope) {
+        $scope.products = ["좋았어요", "힐링됐어요", "프로그램이 마음에 들었어요"];
+        
+        $scope.addItem = function () {
+            $scope.errortext = "";
+            if (!$scope.addMe) {return;}
+            if ($scope.products.indexOf($scope.addMe) == -1) {
+                $scope.products.push($scope.addMe); 
+
+            } else {
+                $scope.errortext = "The item is already in your list.";
+            }
+        }
+        $scope.removeItem = function (x) {
+            $scope.errortext = "";    
+            $scope.products.splice(x, 1);
+        }
+    });
+
+  </script>
+</body>
+</html>
